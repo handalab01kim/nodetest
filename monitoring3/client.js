@@ -1,3 +1,4 @@
+// 화면 송출
 const express = require('express');
 const app = express();
 const io = require('socket.io-client');
