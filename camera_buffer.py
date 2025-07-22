@@ -36,14 +36,20 @@ class CameraBuffer:
             height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
             self.frame_size = (width, height)
             print(f"카메라 연결: {self.frame_size}")
-
+            # c=0
+            # timedebug=time.time()
             while self.running:
                 ret, frame = cap.read()
                 if not ret:
                     print("프레임 수신 실패")
                     break
                 self.buffer.append(frame)
-                time.sleep(1 / self.fps)
+                # time.sleep(1 / self.fps) # opencv 자체 fps로 처리되기에 넣으면 지연되어 프레임이 1초 안에 30개 저장되지 못함. 저장 영상 재생 시 적은 프레임을 재생하기에 영상이 빨라 보이는 현상 발생
+                # c+=1
+                # if c==30:
+                #     c=0
+                #     print(time.time()-timedebug)
+                #     timedebug=time.time()
             cap.release()
 
     def stop(self):
