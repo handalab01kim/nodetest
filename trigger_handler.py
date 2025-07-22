@@ -10,7 +10,7 @@ def save_buffer_to_video(frames, fps, frame_size, output_dir="recordings"):
 
     os.makedirs(output_dir, exist_ok=True)
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    filename = f"record_{timestamp}.mp4"
+    filename = f"{timestamp}.mp4"
     filepath = os.path.join(output_dir, filename)
 
     fourcc = cv2.VideoWriter_fourcc(*'mp4v')
