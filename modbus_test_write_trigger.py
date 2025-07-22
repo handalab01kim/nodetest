@@ -1,12 +1,14 @@
 from pymodbus.client.sync import ModbusTcpClient
 import time
 
-client = ModbusTcpClient("127.0.0.1", port=5020)
+client = ModbusTcpClient("172.30.1.77", port=502)
 
-print("🚀 Trigger ON")
-client.write_coil(0, True, unit=1)
-time.sleep(1)
-print("🔁 Trigger OFF")
-client.write_coil(0, False, unit=1)
+print("Trigger ON!!")
+trigger_val = 2
+client.write_register(0, trigger_val, unit=1)
+
+# time.sleep(1)
+# print("Trigger OFF")
+# client.write_coil(0, False, unit=1)
 
 client.close()

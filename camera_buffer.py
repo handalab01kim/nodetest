@@ -25,8 +25,9 @@ class CameraBuffer:
         while self.running:
             cap = cv2.VideoCapture(0)
             if not cap.isOpened():
-                print("❌ 카메라 연결 실패. 3초 후 재시도...")
-                time.sleep(3)
+                print("카메라 연결 실패")
+                # self.buffer.clear() # 카메라 연결 끊길 시 버퍼 제거?
+                time.sleep(5)
                 continue
 
             cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280) # 1280*720
@@ -34,12 +35,12 @@ class CameraBuffer:
             width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)) # 웹캠 해상도 불러오기
             height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
             self.frame_size = (width, height)
-            print(f"🎥 카메라 연결 성공. 해상도: {self.frame_size}. 프레임 수신 시작")
+            print(f"카메라 연결: {self.frame_size}")
 
             while self.running:
                 ret, frame = cap.read()
                 if not ret:
-                    print("⚠️ 프레임 수신 실패. 재연결 시도.")
+                    print("프레임 수신 실패")
                     break
                 self.buffer.append(frame)
                 time.sleep(1 / self.fps)
