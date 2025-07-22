@@ -6,9 +6,15 @@ import time
 # 외부에서 등록되는 콜백 함수
 trigger_callback = None
 
-MODBUS_IP = "172.30.1.77"
-MODBUS_PORT = 502
+MODBUS_IP = "localhost"
+MODBUS_PORT = 5020
 TRIGGER_REGISTER = 0   # Coil -> word 주소 # 2010
+
+def configure(ip, port, word):
+    global MODBUS_IP, MODBUS_PORT, TRIGGER_REGISTER
+    MODBUS_IP = ip
+    MODBUS_PORT = port
+    TRIGGER_REGISTER = word
 
 def modbus_loop():
     client = ModbusTcpClient(MODBUS_IP, port=MODBUS_PORT)
