@@ -4,7 +4,7 @@ import time
 client = ModbusTcpClient("172.30.1.77", port=502)
 
 print("Trigger ON!!")
-trigger_val = 2
+trigger_val = 1
 client.write_register(0, trigger_val, unit=1)
 
 # time.sleep(1)
