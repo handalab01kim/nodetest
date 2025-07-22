@@ -10,23 +10,19 @@ trigger_callback = None
 MODBUS_IP = "127.0.0.1"
 MODBUS_PORT = 5020
 TRIGGER_REGISTER = 0  # Coil 주소 (예: 0번)
-MIN_INTERVAL = 12  # 최소 트리거 간격 (초)
+# MIN_INTERVAL = 12  # 최소 트리거 간격 (초)
 
 def modbus_loop():
     client = ModbusTcpClient(MODBUS_IP, port=MODBUS_PORT)
     client.connect()
     print(f"📡 Modbus 연결됨: {MODBUS_IP}:{MODBUS_PORT}")
 
-    last_trigger_time = 0
-
     while True:
         try:
             result = client.read_coils(TRIGGER_REGISTER, 1, unit=1)
             if result and not result.isError():
                 coil = result.bits[0]
-                now = time.time()
-                if coil and now - last_trigger_time >= MIN_INTERVAL:
-                    last_trigger_time = now
+                if coil :
                     print("🎯 Modbus 트리거 감지됨")
                     if trigger_callback:
                         Thread(target=trigger_callback).start()
