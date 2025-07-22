@@ -4,9 +4,8 @@ import os
 from datetime import datetime
 
 def save_buffer_to_video(frames, fps, frame_size, output_dir="recordings"):
-    print("트리거 감지")
     if not frames:
-        print("저장할 프레임이 없음")
+        print("저장할 프레임 없음")
         return
 
     os.makedirs(output_dir, exist_ok=True)

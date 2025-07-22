@@ -23,7 +23,7 @@ def modbus_loop():
                 val = result.registers[0]
                 # print("modbus value:", val)
                 if val==1 :
-                    print("Modbus 트리거 감지됨")
+                    print("Modbus 트리거 감지")
                     if trigger_callback:
                         Thread(target=trigger_callback).start()
                     else:
@@ -31,7 +31,7 @@ def modbus_loop():
                     client.write_register(TRIGGER_REGISTER, 0, unit=1)
             time.sleep(1)
         except Exception as e:
-            print("Modbus 오류:", e)
+            print("Modbus Error:", e)
             time.sleep(5)
 
 def start():
