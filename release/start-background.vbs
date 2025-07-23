@@ -1,6 +1,6 @@
 ' ===== 파라미터 설정 =====
-' 모듈 디렉터리의 libs 경로
-mainScriptPath = "C:\Users\사용자\python-video-module\libs"
+' 모듈 디렉터리의 libs 경로 (한글 포함 X)
+mainScriptPath = "C:\Users\username\python-video-module\libs"
 timeVal = 20
 modIP = "172.30.1.77"
 modPort = 502

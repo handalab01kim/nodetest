@@ -1,7 +1,7 @@
 import argparse
-from camera_buffer import CameraBuffer
-from trigger_handler import save_buffer_to_video
-import trigger_modbus
+from .camera_buffer import CameraBuffer
+from .trigger_handler import save_buffer_to_video
+from . import trigger_modbus
 
 def main():
     parser = argparse.ArgumentParser()
