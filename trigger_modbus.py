@@ -23,8 +23,8 @@ def modbus_loop():
 
     while True:
         try:
-            # result = client.read_coils(TRIGGER_REGISTER, 1, unit=1)
-            result = client.read_holding_registers(TRIGGER_REGISTER, 1, unit=1)
+            # result = client.read_coils(TRIGGER_REGISTER, 1)
+            result = client.read_holding_registers(TRIGGER_REGISTER, 1)
             if result and not result.isError():
                 val = result.registers[0]
                 # print("modbus value:", val)
@@ -34,7 +34,7 @@ def modbus_loop():
                         Thread(target=trigger_callback).start()
                     else:
                         print("trigger_callback 정의되지 않음")
-                    client.write_register(TRIGGER_REGISTER, 0, unit=1)
+                    client.write_register(TRIGGER_REGISTER, 0)
             time.sleep(1)
         except Exception as e:
             print("Modbus Error:", e)
