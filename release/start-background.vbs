@@ -1,10 +1,12 @@
+' WshShell.CurrentDirectory = mainScriptPath: 현재 디렉토리에서 실행 시 생략 가능
+' mainScriptPath: 모듈 디렉터리 경로 (한글 포함 불가) / WshShell.CurrentDirectory 생략 시 사용하지 않음
+
 ' ===== config =====
-' 모듈 디렉터리 경로 (한글 포함 X)
-mainScriptPath = "C:\Users\username\python-video-module"
 timeVal = 20
 modIP = "172.30.1.77"
 modPort = 502
 modWord = 0
+mainScriptPath = "C:\Users\username\python-video-module"
 
 ' ===== run =====
 cmd = "python main.py" & _
