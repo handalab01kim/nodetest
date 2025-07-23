@@ -1,5 +1,5 @@
 @echo off
-@REM 설정 값 (TIME: 영상 길이(초))
+@REM config (TIME: 영상 길이(초))
 set TIME=20
 set MOD_IP=172.30.1.77
 set MOD_PORT=502
