@@ -3,15 +3,16 @@ TIME_ = 20
 MOD_IP = "172.30.1.77"
 MOD_PORT = 502
 MOD_WORD = 0
-'PATH_ = "C:\Users\username\python-video-module"
-PATH_ = "C:\Users\handa\repositories\nodejstest\release"
+PATH_ = "C:\Users\username\python-video-module"
+TXT_PATH = "C:\Users\username\example\test.txt"
 
 ' ===== run =====
 cmd = "python main.py" & _
       " --time " & TIME_ & _
       " --mod-ip " & MOD_IP & _
       " --mod-port " & MOD_PORT & _
-      " --mod-word " & MOD_WORD
+      " --mod-word " & MOD_WORD & _
+      " --txt-path " & TXT_PATH
 
 Set WshShell = CreateObject("WScript.Shell")
 WshShell.CurrentDirectory = PATH_

@@ -21,6 +21,10 @@ def modbus_loop():
     client.connect()
     print(f"Modbus: {MODBUS_IP}:{MODBUS_PORT}")
 
+    import logging
+    logger = logging.getLogger("error_logger")
+    logger.info(f"Modbus: {MODBUS_IP}:{MODBUS_PORT}")
+
     while True:
         try:
             # result = client.read_coils(TRIGGER_REGISTER, 1)

@@ -35,7 +35,12 @@ class CameraBuffer:
             width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)) # 웹캠 해상도 불러오기
             height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
             self.frame_size = (width, height)
-            print(f"카메라 연결: {self.frame_size}")
+            print(f"카메라 연결됨: {self.frame_size}")
+
+            import logging
+            logger = logging.getLogger("error_logger")
+            logger.info(f"카메라 연결: {self.frame_size}")
+
             # c=0
             # timedebug=time.time()
             while self.running:
