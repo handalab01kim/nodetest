@@ -1,2 +1,0 @@
-import trigger
-trigger.trigger()
