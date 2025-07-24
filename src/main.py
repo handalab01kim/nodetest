@@ -4,13 +4,21 @@ from .camera_buffer import CameraBuffer
 from .trigger_handler import save_buffer_to_video
 from . import trigger_modbus
 from .error import error_log
+import socket
 import logging
-# import os
-# import argparse # dev version import
-# from camera_buffer import CameraBuffer
-# from trigger_handler import save_buffer_to_video
-# import trigger_modbus
-# from error import error_log
+logger = logging.getLogger("error_logger")
+
+def occupy_port(port):
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.bind(("0.0.0.0", port))
+        s.listen(1)
+        print(f"{port} on!")
+        return s
+    except Exception as e:
+        logger.exception(f"{port} 포트 점유 실패")
+        print(f"{port} 포트 점유 실패")
+        quit()
 
 def main():
     parser = argparse.ArgumentParser()
@@ -25,7 +33,6 @@ def main():
     error_log(os.path.dirname(args.txt_path)) # txt와 같은 위치에 로그파일 저장
 
     # 서비스 시작 로그
-    logger = logging.getLogger("error_logger")
     logger.info(f"서비스 시작;\ttime: {args.time},\ttxt_path: {args.txt_path}")
 
     # 카메라 버퍼 초기화
@@ -62,11 +69,16 @@ def main():
     trigger_modbus.start()
 
 
+    # 포트 점유 - 중복 실행 X
+    port=9988
+    port_socket = occupy_port(port)
+
     # 프로그램 종료 X
     import time
     try:
         while True: time.sleep(1)
     except KeyboardInterrupt: quit()
+    
 
 if __name__ == "__main__":
     main()
