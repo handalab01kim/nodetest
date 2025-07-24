@@ -2,6 +2,5 @@ from setuptools import setup
 from Cython.Build import cythonize
 
 setup(
-    # ext_modules=cythonize(["main.pyx","camera_buffer.py", "trigger_handler.py", "trigger_modbus.py"])
-    ext_modules=cythonize(["main.py"])
+    ext_modules=cythonize(["src/main.py", "src/camera_buffer.py", "src/trigger_handler.py", "src/trigger_modbus.py"])
 )
