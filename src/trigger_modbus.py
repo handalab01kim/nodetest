@@ -42,6 +42,7 @@ def modbus_loop():
             time.sleep(1)
         except Exception as e:
             print("Modbus Error:", e)
+            logger.exception(f"Modbus 연결 실패 - {MODBUS_IP}:{MODBUS_PORT}; {e}")
             time.sleep(5)
 
 def start():

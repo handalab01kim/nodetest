@@ -22,10 +22,13 @@ class CameraBuffer:
         self.thread.start()
 
     def _capture_loop(self):
+        import logging
+        logger = logging.getLogger("error_logger")
         while self.running:
             cap = cv2.VideoCapture(0)
             if not cap.isOpened():
                 print("카메라 연결 실패")
+                logger.info(f"카메라 연결 실패")
                 # self.buffer.clear() # 카메라 연결 끊길 시 버퍼 제거?
                 time.sleep(5)
                 continue
@@ -47,6 +50,7 @@ class CameraBuffer:
                 ret, frame = cap.read()
                 if not ret:
                     print("프레임 수신 실패")
+                    logger.info("프레임 수신 실패")
                     break
                 self.buffer.append(frame)
                 # time.sleep(1 / self.fps) # opencv 자체 fps로 처리되기에 넣으면 지연되어 프레임이 1초 안에 30개 저장되지 못함. 저장 영상 재생 시 적은 프레임을 재생하기에 영상이 빨라 보이는 현상 발생
