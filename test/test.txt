@@ -1,1 +1,1 @@
-C:\Users\handa\share, abcde
+C:\Users\username\example\recorded_video,video_file_name
