@@ -3,8 +3,7 @@ TIME_ = 20
 MOD_IP = "172.30.1.77"
 MOD_PORT = 502
 MOD_WORD = 0
-PATH_ = "C:\Users\username\python-video-module"
-TXT_PATH = "C:\Users\username\example\test.txt"
+TXT_PATH = "txt_path\Path.txt"
 
 ' ===== run =====
 cmd = "python main.py" & _
@@ -15,5 +14,4 @@ cmd = "python main.py" & _
       " --txt-path " & TXT_PATH
 
 Set WshShell = CreateObject("WScript.Shell")
-WshShell.CurrentDirectory = PATH_
 WshShell.Run "cmd.exe /C " & cmd, 0, False

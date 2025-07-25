@@ -1,0 +1,10 @@
+https://dreamfuture.tistory.com/119
+
+mediamtx 실행하기
+다운: https://github.com/bluenviron/mediamtx/releases
+
+웹캠 이름 확인
+ffmpeg -list_devices true -f dshow -i dummy
+
+RTSP 시작
+ffmpeg -f dshow -i video="ABKO APC925 QHD WEBCAM" -vcodec libx264 -rtsp_transport tcp -fflags nobuffer -tune zerolatency -f rtsp rtsp://localhost:8554/live
