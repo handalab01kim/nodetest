@@ -12,21 +12,21 @@ import logging
 # import trigger_modbus
 # from error import error_log
 
-def main():
+def main(default_time, mod_ip, mod_port, mod_word, txt_path):
     parser = argparse.ArgumentParser()
-    parser.add_argument("--time", type=int, default=20, help="영상 시간(초)")
-    parser.add_argument("--mod-ip", type=str, default="localhost", help="Modbus 장치 IP")
-    parser.add_argument("--mod-port", type=int, default=5020, help="Modbus port")
-    parser.add_argument("--mod-word", type=int, default=0, help="Modbus word 주소")
-    parser.add_argument("--txt-path", type=str, default="test.txt", help="저장할 영상 정보를 가진 txt 파일 경로")
+    parser.add_argument("--time", type=int, default=default_time, help="영상 시간(초)")
+    # parser.add_argument("--mod-ip", type=str, default="localhost", help="Modbus 장치 IP")
+    # parser.add_argument("--mod-port", type=int, default=5020, help="Modbus port")
+    # parser.add_argument("--mod-word", type=int, default=0, help="Modbus word 주소")
+    # parser.add_argument("--txt-path", type=str, default="test.txt", help="저장할 영상 정보를 가진 txt 파일 경로")
     args = parser.parse_args()
 
     # 로거
-    error_log(os.path.dirname(args.txt_path)) # txt와 같은 위치에 로그파일 저장
+    error_log(os.path.dirname(txt_path)) # txt와 같은 위치에 로그파일 저장
 
     # 서비스 시작 로그
     logger = logging.getLogger("error_logger")
-    logger.info(f"서비스 시작;\ttime: {args.time},\ttxt_path: {args.txt_path}")
+    logger.info(f"서비스 시작;\ttime: {args.time},\ttxt_path: {txt_path}")
 
     # 카메라 버퍼 초기화
     cam = CameraBuffer(seconds=args.time)
@@ -37,7 +37,7 @@ def main():
         # logger = logging.getLogger("error_logger")
         txt_args = None
         try:
-            with open(args.txt_path, 'r') as f:
+            with open(txt_path, 'r') as f:
                 info = f.readline()
                 txt_args=[s.strip() for s in info.split(",")] # 공백 제거
                 if len(txt_args)!=2:
@@ -45,7 +45,7 @@ def main():
                     logger.exception("txt 파일 안에 ',' 기준 두 값이 존재해야 합니다.")
                     return
         except Exception as e:
-            logger.exception(f"txt 파일 찾을 수 없음: {args.txt_path}")
+            logger.exception(f"txt 파일 찾을 수 없음: {txt_path}")
             return  # 동영상 저장 로직만 종료
         # output_dir, filename = info.split(",")
         output_dir, filename = txt_args
@@ -55,7 +55,7 @@ def main():
 
 
     # args modbus 설정 전달
-    trigger_modbus.configure(args.mod_ip, args.mod_port, args.mod_word)
+    trigger_modbus.configure(mod_ip, mod_port, mod_word)
 
     # 트리거 콜백 함수 등록
     trigger_modbus.trigger_callback = on_trigger
