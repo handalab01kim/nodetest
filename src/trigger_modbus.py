@@ -9,12 +9,14 @@ trigger_callback = None
 MODBUS_IP = "localhost"
 MODBUS_PORT = 5020
 TRIGGER_REGISTER = 0   # Coil -> word 주소 # 2010
+INTERVAL=0
 
-def configure(ip, port, word):
-    global MODBUS_IP, MODBUS_PORT, TRIGGER_REGISTER
+def configure(ip, port, word, interval):
+    global MODBUS_IP, MODBUS_PORT, TRIGGER_REGISTER, INTERVAL
     MODBUS_IP = ip
     MODBUS_PORT = port
     TRIGGER_REGISTER = word
+    INTERVAL=interval
 
 def modbus_loop():
     client = ModbusTcpClient(MODBUS_IP, port=MODBUS_PORT)
@@ -39,7 +41,7 @@ def modbus_loop():
                     else:
                         print("trigger_callback 정의되지 않음")
                     client.write_register(TRIGGER_REGISTER, 0)
-            time.sleep(1)
+            time.sleep(INTERVAL)
         except Exception as e:
             print("Modbus Error:", e)
             logger.exception(f"Modbus 연결 실패 - {MODBUS_IP}:{MODBUS_PORT}; {e}")

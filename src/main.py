@@ -12,7 +12,7 @@ import logging
 # import trigger_modbus
 # from error import error_log
 
-def main(default_time, mod_ip, mod_port, mod_word, txt_path):
+def main(default_time, mod_ip, mod_port, mod_word, txt_path, interval):
     parser = argparse.ArgumentParser()
     parser.add_argument("--time", type=int, default=default_time, help="영상 시간(초)")
     # parser.add_argument("--mod-ip", type=str, default="localhost", help="Modbus 장치 IP")
@@ -55,7 +55,7 @@ def main(default_time, mod_ip, mod_port, mod_word, txt_path):
 
 
     # args modbus 설정 전달
-    trigger_modbus.configure(mod_ip, mod_port, mod_word)
+    trigger_modbus.configure(mod_ip, mod_port, mod_word, interval)
 
     # 트리거 콜백 함수 등록
     trigger_modbus.trigger_callback = on_trigger
